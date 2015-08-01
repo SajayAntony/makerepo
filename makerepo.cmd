@@ -4,21 +4,30 @@ IF [%1]==[]  GOTO :USAGE
 
 SET MKREPO_PATH=%1
 CALL %~dp0makelocalrepo.cmd %CD%
+IF ERRORLEVEL 1 GOTO :ERROR 
+
 CALL %~dp0makeremoterepo.cmd %MKREPO_PATH%
+IF ERRORLEVEL 1 GOTO :ERROR 
+
 CALL %~dp0configureremote.cmd %MKREPO_PATH%
+IF ERRORLEVEL 1 GOTO :ERROR 
 
 echo.
 echo ------------- CLONE URL--------------
-echo git clone %MKREPO_PATH% %MKREPO_NAME%
+for /f  %%a in ("%MKREPO_PATH%") do set MKREPO_NAME=%%~nxa
+set MKREPO_NAME=!MKREPO_NAME:.git=!
+echo git clone %MKREPO_PATH% !MKREPO_NAME!
 ENDLOCAL
+exit /b 0
 
-:EXIT 
+:ERROR
+echo ERROR: Could not make repo. 
 exit /b
 
 :USAGE
 echo.
 echo USAGE:
-echo 	makerepo {REPO_NAME}
+echo 	makerepo {UNC_SHARE}
 exit /b 1
 
 

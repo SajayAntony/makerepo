@@ -6,11 +6,9 @@ set MKREPO_PATH=%1
 SET MKREPO_PATH=%MKREPO_PATH:/=\%
 REM Check if its fully qualified.
 echo %MKREPO_PATH% | findstr /b ^\\\\ >nul
-IF ERRORLEVEL 1 (	
-	REM Using a common share to drop the bare repo in the users folder.
-	SET MKREPO_PATH=//aaptperffs/repos/%USERNAME%/%MKREPO_PATH%.git
-) ELSE (
-   	REM Fully qualified path given.     	
+IF ERRORLEVEL 1 (
+ echo ERROR: "%MKREPO_PATH%" is not a fully qualified UNC share name.
+ exit /b 1	
 )
 
 REM FIX up path separators
@@ -25,11 +23,11 @@ GOTO :END
 git init --bare %MKREPO_NIX_PATH%
 if NOT ERRORLEVEL 1 (
 	echo -------------- CREATED REMOTE REPO --------------
+	GOTO :END
 	)
-GOTO :END
-
+exit /b 1
 :USAGE
-echo makeremoterepo.cmd {UNC or repo name}
+echo makeremoterepo.cmd {UNC SHARE}
 exit /b 1
 
 :END

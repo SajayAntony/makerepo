@@ -8,7 +8,7 @@ set MKREPO_LOCALNAME=%1
 IF NOT EXIST .git (
 	REM curl -O https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore 
 	REM move VisualStudio.gitignore .gitignore
-	
+
 	for /f "delims=\" %%a in ("%cd%") do set currentFolder=%%~nxa
 	set MKREPO_LOCALNAME=%currentFolder%
 
@@ -29,7 +29,7 @@ GOTO :END
 :USAGE 
 echo USAGE:
 echo.
-echo	makelocalrepo.cmd {directory} {reponame} 
+echo	makelocalrepo.cmd {directory}
 exit /b 1
 
 :END
