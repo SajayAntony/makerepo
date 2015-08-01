@@ -1,8 +1,8 @@
 # Make Repo
 
-A simple set of scripts to convert a your source/artifacts into a repo and enable sharing. 
-This avoid having to zip/xcopy your source to share.  Since it builds on git you can  work against
-a respository that others on your team can also look at or contribute into. 
+A simple set of scripts to convert your source/artifacts into a repo and enable sharing. 
+This avoids having to zip or xcopy your source to a share of heavens forbid email. Since this builds on git 
+you can work against a respository that others on your team can also look at or contribute into. 
 The `create` script is the bootstrapper and does 3 things 
 
 1. Converts your artifacts to a local repository and commits them. 
@@ -46,3 +46,13 @@ be prompted for if it hasn't been configured and if you specify just a name inst
 create testrepo
 ```
 This will prompt for script creation.  
+
+### Making local repos
+This script is  nothing more than just git init with a first commit. 
+You can run it in the folder you want or just point it at the source that you want commited. 
+If you just want source history then this is all you probably need. I wonder why VS doesn't 
+do this by default. As soon as you run this VS git elements lights up. 
+
+```
+makelocalrepo directory
+```
