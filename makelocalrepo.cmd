@@ -1,9 +1,18 @@
 @echo off
-IF [%1]==[]  GOTO :USAGE
+
+IF "%1"=="/?" GOTO :USAGE
 
 setlocal ENABLEDELAYEDEXPANSION
-pushd %1
+
 set MKREPO_LOCALNAME=%1
+IF [%1]==[] set MKREPO_LOCALNAME=%CD%
+
+IF NOT EXIST %MKREPO_LOCALNAME% ( 
+	echo ERROR: Directory "%MKREPO_LOCALNAME%" not found.
+	GOTO :USAGE
+)
+
+pushd %MKREPO_LOCALNAME%
 
 IF NOT EXIST .git (
 	REM curl -O https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore 
@@ -28,8 +37,10 @@ GOTO :END
 
 :USAGE 
 echo USAGE:
+echo		makelocalrepo.cmd [directory]
 echo.
-echo	makelocalrepo.cmd {directory}
+echo Directory is optional and you can run the script and it will make the current folder 
+echo a repository and commit the artifacts into the newly created local repository.
 exit /b 1
 
 :END

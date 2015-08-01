@@ -24,7 +24,7 @@ IF ERRORLEVEL 1 (
 GOTO :END
 
 :USAGE
- create.cmd {repo name or UNC share}
+ echo create.cmd {repo name or UNC share}
  exit /b 1
 
 :END
