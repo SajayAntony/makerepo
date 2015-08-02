@@ -13,7 +13,7 @@ CALL %~dp0configureremote.cmd %MKREPO_PATH%
 IF ERRORLEVEL 1 GOTO :ERROR 
 
 echo.
-echo ------------- CLONE URL--------------
+echo ------------- CLONE URL --------------
 for /f  %%a in ("%MKREPO_PATH%") do set MKREPO_NAME=%%~nxa
 set MKREPO_NAME=!MKREPO_NAME:.git=!
 echo git clone %MKREPO_PATH% !MKREPO_NAME!

@@ -22,7 +22,7 @@ GOTO :END
 
 git init --bare %MKREPO_NIX_PATH%
 if NOT ERRORLEVEL 1 (
-	echo -------------- CREATED REMOTE REPO --------------
+    echo -------- CREATED REMOTE REPO -----------
 	GOTO :END
 	)
 exit /b 1

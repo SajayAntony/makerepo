@@ -26,7 +26,7 @@ IF NOT EXIST .git (
 	git add -A
 	git commit -m "Initial Commit for repo !MKREPO_LOCALNAME!"
 	IF NOT ERRORLEVEL 1 (
-		echo -------------- CREATED LOCAL REPO --------------
+	echo ---------- CREATED LOCAL REPO -----------
 	) 
 ) ELSE (
   echo "%CD%" is already a git repo.
