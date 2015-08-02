@@ -17,6 +17,10 @@ ECHO Going to initialize a git repo in %MKREPO_PATH%
 
 :INITIALIZE_REPO
 If EXIST %MKREPO_PATH% ( echo Directory %MKREPO_PATH% already exists. 
+pushd %MKREPO_PATH%
+git rev-parse
+IF ERRORLEVEL 1 exit /b 1
+popd 
 GOTO :END
 )
 
