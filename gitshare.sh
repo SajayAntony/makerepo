@@ -28,7 +28,7 @@ gitshare () {
 		git commit -am "sharing"
 	fi
 	repo=$share$(id -u -n)'/'$1
-	pushd //aaptperffs/repos > /dev/null
+	pushd $share > /dev/null
 	mkdir -p $(id -u -n)'/'$1'/.git'
 	popd > /dev/null
 	cp -r .git $repo
