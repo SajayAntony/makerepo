@@ -4,17 +4,32 @@ gitshare () {
 		echo "> gitshare [name]"
 		return
 	fi
-	read -p 'Are you sure you would like to upload everything in '$(pwd) -n 1 -r
-	echo    # (optional) move to a new line
-	if [[ ! $REPLY =~ ^[Yy]$ ]]
-	then
-	    return
+	
+	while true; do
+	    read -p "do you want to share "$(pwd) yn
+	    echo ""
+	    case $yn in
+	        [Yy]* ) break;;
+	        [Nn]* ) return;;
+	        * ) echo "Please answer yes or no.";;
+	    esac
+	done
+
+
+
+	if [ ! -e .sharename ]; then
+		if [ ! -e ~/.sharerc ]; then
+			echo 'no share configured. please add one to ~/.sharerc or .share'
+			return
+		fi
+		share=$(cat ~/.sharerc)
 	fi
+	share=$(cat .share)
 	if [[ $(git init) != *"Reinitialized" ]]; then #if it's already a git repo, dont do anything 
 		git add -A
 		git commit -am "sharing"
 	fi
-	repo='//aaptperffs/repos/'$(id -u -n)'/'$1
+	repo=$share$(id -u -n)'/'$1
 	pushd //aaptperffs/repos > /dev/null
 	mkdir -p $(id -u -n)'/'$1'/.git'
 	popd > /dev/null
