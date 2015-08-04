@@ -6,7 +6,7 @@ gitshare () {
 	fi
 	
 	while true; do
-	    read -p "do you want to share "$(pwd) yn
+	    read -p "are you sure you want to share "$(pwd)' [y/n]?  ' yn
 	    echo ""
 	    case $yn in
 	        [Yy]* ) break;;
@@ -15,8 +15,6 @@ gitshare () {
 	    esac
 	done
 
-
-
 	if [ ! -e .sharename ]; then
 		if [ ! -e ~/.sharerc ]; then
 			echo 'no share configured. please add one to ~/.sharerc or .share'
@@ -24,7 +22,7 @@ gitshare () {
 		fi
 		share=$(cat ~/.sharerc)
 	fi
-	share=$(cat .share)
+	share=$(cat .sharename)
 	if [[ $(git init) != *"Reinitialized" ]]; then #if it's already a git repo, dont do anything 
 		git add -A
 		git commit -am "sharing"
