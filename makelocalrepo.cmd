@@ -22,11 +22,11 @@ IF NOT EXIST "%MKREPO_LOCALNAME%" (
 pushd "%MKREPO_LOCALNAME%"
 
 IF NOT EXIST .git (
-	:: curl -O https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore 
-	:: move VisualStudio.gitignore .gitignore
-
 	for /f "delims=\" %%a in ("%cd%") do set currentFolder=%%~nxa
 	set MKREPO_LOCALNAME=%currentFolder%
+
+	REM curl -O https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore 
+	REM move VisualStudio.gitignore .gitignore
 
 	git init
 	If NOT EXIST ".gitignore" xcopy "%~dp0.gitignore"
