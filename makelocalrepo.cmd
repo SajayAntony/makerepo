@@ -1,22 +1,29 @@
-@echo off
-
-IF "%1"=="/?" GOTO :USAGE
+@echo OFF
 
 setlocal ENABLEDELAYEDEXPANSION
 
-set MKREPO_LOCALNAME=%1
-IF [%1]==[] set MKREPO_LOCALNAME=%CD%
+if [%1]==[] (
+	set MKREPO_LOCALNAME="%CD%"
+) ELSE (
+	set MKREPO_LOCALNAME=%1
+)
 
-IF NOT EXIST %MKREPO_LOCALNAME% ( 
+:: Trim quotes
+set MKREPO_LOCALNAME=%MKREPO_LOCALNAME:"=%
+
+IF "%MKREPO_LOCALNAME%"=="/?" GOTO :USAGE
+
+
+IF NOT EXIST "%MKREPO_LOCALNAME%" ( 
 	echo ERROR: Directory "%MKREPO_LOCALNAME%" not found.
 	GOTO :USAGE
 )
 
-pushd %MKREPO_LOCALNAME%
+pushd "%MKREPO_LOCALNAME%"
 
 IF NOT EXIST .git (
-	REM curl -O https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore 
-	REM move VisualStudio.gitignore .gitignore
+	:: curl -O https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore 
+	:: move VisualStudio.gitignore .gitignore
 
 	for /f "delims=\" %%a in ("%cd%") do set currentFolder=%%~nxa
 	set MKREPO_LOCALNAME=%currentFolder%

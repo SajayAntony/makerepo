@@ -3,7 +3,7 @@ SETLOCAL ENABLEDELAYEDEXPANSION
 IF [%1]==[]  GOTO :USAGE
 
 SET MKREPO_PATH=%1
-CALL %~dp0makelocalrepo.cmd %CD%
+CALL %~dp0makelocalrepo.cmd "%CD%"
 IF ERRORLEVEL 1 GOTO :ERROR 
 
 CALL %~dp0makeremoterepo.cmd %MKREPO_PATH%
