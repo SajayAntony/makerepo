@@ -17,6 +17,7 @@ SET MKREPO_REMOTE_NEW=origin
 set /p MKREPO_REMOTE_NEW=Provide new name for remote [Default origin] ^?:
 SET MKREPO_REMOTE_NEW=!MKREPO_REMOTE_NEW: =!
 if "!MKREPO_REMOTE_NEW!"=="" exit /b 1
+SET MKREPO_REMOTE=!MKREPO_REMOTE_NEW!
 
 git remote add !MKREPO_REMOTE_NEW! %MKREPO_URL%
 IF ERRORLEVEL 1 (
@@ -30,6 +31,7 @@ IF ERRORLEVEL 1 (
 	)
 )
 echo Pushing changes to remote %MKREPO_URL%
+echo git push %MKREPO_REMOTE% master
 git push %MKREPO_REMOTE% master
 
 :END
